@@ -76,15 +76,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
 
-        String loc_name = location.get(position);
-        String rt_name = restaurant_name.get(position);
-        String im_name = image_names.get(position);
+
+
+        float rating = Float.parseFloat(ratingBar_number.get(position));
+        int ratingInt = (int) rating;
 
         holder.template_restaurantText.setText(restaurant_name.get(position));
         holder.template_locationText.setText(location.get(position));
         holder.template_restaurant_country.setText(country_names.get(position));
-        holder.template_ratingBar.setNumStars(Integer.parseInt(ratingBar_number.get(position)));
-        holder.template_reviewsCount.setText(review_count.get(position));
+        holder.template_ratingBar.setNumStars(ratingInt);
+        holder.template_reviewsCount.setText(review_count.get(position)+" reviews");
         holder.templateImageView.setImageResource(R.drawable.restaurant_pic);
        // holder.template_locationText.setText(loc_name);
 
