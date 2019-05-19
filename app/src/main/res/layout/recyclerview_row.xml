@@ -11,14 +11,14 @@
     <ImageView
         android:id="@+id/template_image"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="120dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:scaleType="fitXY"
         android:src="@drawable/restaurant_pic"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/vertical_guideline"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:scaleType="fitXY"
 
 
         />
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/vertical_guideline"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3"
+        app:layout_constraintGuide_percent="0.35"
         ></android.support.constraint.Guideline>
 
 
@@ -43,83 +43,82 @@
     </android.support.constraint.Guideline>
 
     <android.support.constraint.ConstraintLayout
-        android:layout_height="100dp"
         android:layout_width="0dp"
-        app:layout_constraintRight_toLeftOf="@id/vertical_guideline_right"
-        app:layout_constraintLeft_toRightOf="@+id/vertical_guideline"
+        android:layout_height="120dp"
         android:orientation="vertical"
-        >
+        app:layout_constraintLeft_toRightOf="@+id/vertical_guideline"
+        app:layout_constraintRight_toLeftOf="@id/vertical_guideline_right">
 
         <TextView
             android:id="@+id/template_restaurant_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Restaurant Name"
+            android:layout_marginBottom="15dp"
+            android:text="Restaurant Name is too long to"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/first_horizontal_guideline"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/first_horizontal_guideline"
-            android:layout_marginBottom="15dp"
-            android:textColor="@android:color/black"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Guideline
             android:id="@+id/first_horizontal_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35"
-            >
-        </android.support.constraint.Guideline>
+            app:layout_constraintGuide_begin="49dp"></android.support.constraint.Guideline>
 
         <TextView
             android:id="@+id/template_location_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📌 Location "
-            app:layout_constraintTop_toBottomOf="@id/first_horizontal_guideline"
-            android:textSize="20sp"
+            android:text="Location "
             android:textColor="@android:color/black"
+            android:textSize="17sp"
+            app:layout_constraintTop_toBottomOf="@id/first_horizontal_guideline"
 
             />
+
         <RatingBar
             android:id="@+id/template_star_review"
             style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="5"
-            android:rating="3.0"
-            android:progressTint="@android:color/holo_blue_dark"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:maxWidth="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="10dp"
-            />
+
+            android:numStars="5"
+            android:stepSize="1"
+            android:progressTint="@android:color/holo_blue_dark"
+            android:rating="5"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
         <TextView
             android:id="@+id/template_restaurant_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="country"
-            app:layout_constraintTop_toBottomOf="@id/first_horizontal_guideline"
-            app:layout_constraintRight_toRightOf="parent"
-            android:textSize="20sp"
+            android:text="food type"
             android:textColor="@android:color/black"
+            android:textSize="17sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/first_horizontal_guideline"
 
             />
+
         <TextView
             android:id="@+id/template_review_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="96 reviews"
-            android:textSize="20sp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="10dp"
+            android:paddingTop="5dp"
+            android:text="96 reviews"
             android:textColor="@android:color/holo_blue_dark"
-            />
-
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

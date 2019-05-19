@@ -2,7 +2,10 @@ package com.example.sher.restaurantproject;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -10,6 +13,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 
@@ -21,6 +31,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private List<String> ratingBar_number;
     private List<String> review_count;
     private List<String> image_names;
+    private Context context;
 
 
 
@@ -65,6 +76,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         this.review_count = reviews_count;
         this.image_names = image_name;
         //this.mData = data;
+        this.context = context;
     }
 
     @Override
@@ -74,23 +86,39 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position){
+    public void onBindViewHolder(final MyViewHolder holder, int position){
 
 
 
         float rating = Float.parseFloat(ratingBar_number.get(position));
         int ratingInt = (int) rating;
+        String location_country[] = location.get(position).split("\\ ");
+        Log.d("location",location_country[0]);
+        Log.d("location", location_country[1]);
 
         holder.template_restaurantText.setText(restaurant_name.get(position));
-        holder.template_locationText.setText(location.get(position));
+        holder.template_locationText.setText(location_country[1]);
         holder.template_restaurant_country.setText(country_names.get(position));
         holder.template_ratingBar.setNumStars(ratingInt);
         holder.template_reviewsCount.setText(review_count.get(position)+" reviews");
-        holder.templateImageView.setImageResource(R.drawable.restaurant_pic);
-       // holder.template_locationText.setText(loc_name);
+       // holder.templateImageView.setImageResource(R.drawable.restaurant_pic);
 
+        String imageUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+image_names.get(position)+"&key=AIzaSyDEDjQ3XTOk1dJS5P6afTnr3BCPjB6acJs";
+       // String imageUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=AIzaSyDnpKd40AWisgA2xDNtdN1-qzC-CszkYjk";
+        Glide.with(context).load(imageUrl).apply(new RequestOptions().override(300, 175)).listener(new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                // if failed to load a pic automatically then load an image from drawable
+                holder.templateImageView.setImageResource(R.drawable.restaurant_pic);
+                return false;
+            }
 
-
+            @Override
+            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+               // if loaded properly it comes here
+                return false;
+            }
+        }).into(holder.templateImageView);
 
        // String textViewDetail =  mData.get(position);
         //holder.rowText.setText(textViewDetail);
