@@ -33,11 +33,11 @@ public class FetchNearbyHotel {
             Constants.longitude = "55.2708";
         url = baseurl+Constants.latitude+","+Constants.longitude+"&radius=1000&key=AIzaSyDnpKd40AWisgA2xDNtdN1-qzC-CszkYjk";
         progressDialog = new ProgressDialog(context);
-        new FetchNearbyHotel.RollingNumberRequester().execute();
+        new NearbyRestaurantRequester().execute();
         return false;
     }
 
-    private static class RollingNumberRequester extends AsyncTask<Void,  Void, Void>
+    private static class NearbyRestaurantRequester extends AsyncTask<Void,  Void, Void>
     {
 
         protected void onPreExecute() {
